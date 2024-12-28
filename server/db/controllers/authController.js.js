@@ -1,6 +1,6 @@
 const express = require('express');
 
-const authService = require('../services/authservice.js');
+const authService = require('../services/authService.js');
 
 const register = async (req, res) => {
     const { username, password, role } = req.body;
