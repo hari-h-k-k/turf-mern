@@ -20,6 +20,11 @@ app.use(cors({
 
 app.use(bodyParser.json());
 app.use(cors());
+
+app.get('/', (req, res) => {
+    res.send('Hello, Lockspot!');
+});
+
 app.use('/api', routes);
 
 module.exports=app;
