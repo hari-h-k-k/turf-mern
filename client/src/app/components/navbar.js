@@ -1,8 +1,10 @@
 // components/Navbar.js
 "use client";
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import LoginModal from './loginModal';
+import { useAppContext } from '@/context';
 const Navbar = ({setIsModalOpen}) => {
+    const {info}=useAppContext();
 
     const handleLogin = () => {
         setIsModalOpen(true);
@@ -13,7 +15,7 @@ const Navbar = ({setIsModalOpen}) => {
     return (
         <div style={styles.navbar}>
             <div style={styles.logoText}>Lockspot</div>
-            <button style={styles.button} onClick={handleLogin}>SignIn</button>
+            <button style={styles.button} onClick={handleLogin}>{info.username?info.username:"SignIn"}</button>
         </div>
     );
 };

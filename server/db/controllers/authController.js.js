@@ -7,9 +7,9 @@ const register = async (req, res) => {
 
     try {
 
-        await authService.register(username, password, role);
+        const { token, user } =await authService.register(username, password, role);
 
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(201).json({ message: 'User registered successfully', username:user.username, token:token, role:user.role });
 
     }
 
@@ -26,11 +26,12 @@ const signin = async (req, res) => {
 
     try {
 
-        const { token, user } = await authService.signin(username, password); res.json({ message: "Signin successful!",token, user });
+        const { token, user } = await authService.signin(username, password); res.json({ message: "Signin successful!", username:user.username, token:token, role:user.role });
 
     }
 
     catch (error) {
+        console.log(error)
         res.status(401).json({ message: error.message });
 
     }

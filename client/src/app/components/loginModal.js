@@ -3,8 +3,12 @@ import React, { useState } from 'react';
 import axiosInstance from '@/common/instance';
 import { toast, ToastContainer,Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAppContext} from '@/context';
 
 const LoginModal = ({ isModalOpen, setIsModalOpen }) => {
+
+    const {info,setInfo}=useAppContext();
+
     const [activeTab, setActiveTab] = useState('signin'); // 'signin' or 'signup'
     const [formData, setFormData] = useState({
         username: '',
@@ -34,6 +38,12 @@ const LoginModal = ({ isModalOpen, setIsModalOpen }) => {
                     autoClose: 2000, // Toast disappears after 3 seconds
                 });
                 console.log('Data posted successfully:', response.data);
+                setInfo((prev) => ({
+                    ...prev, // Spread the previous state
+                    username: response.data.username, // Update username
+                    token: response.data.token, // Update token
+                    role: response.data.role || prev.role, // Update role or retain previous
+                }));
                 setIsModalOpen(false);
                 // Handle success (e.g., show a success message or navigate to another page)
             })

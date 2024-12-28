@@ -12,6 +12,12 @@ connectDB();
 
 const app=express();
 
+app.use(cors({
+    origin: '*', // Allow all origins
+    methods: '*', // Allow all methods (GET, POST, PUT, DELETE, etc.)
+    allowedHeaders: '*', // Allow all headers
+}));
+
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/api', routes);

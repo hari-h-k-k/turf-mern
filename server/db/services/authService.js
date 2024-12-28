@@ -12,8 +12,12 @@ const register = async (username, password, role) => {
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    const user = new User({ username, password: hashedPassword, role }); 
-    await user.save();
+    const regUser = new User({ username, password: hashedPassword, role }); 
+    await regUser.save();
+
+    const user = await User.findOne({ username });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    return { token:token, user:user };
 }
 const signin = async (username, password) => {
 
@@ -24,7 +28,7 @@ const signin = async (username, password) => {
     }
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
-    return { token, user };
+    return { token:token, user:user };
 
 };
 
