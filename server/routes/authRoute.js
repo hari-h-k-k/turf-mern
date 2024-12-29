@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const authController=require('../db/controllers/authController.js.js');
+const authController=require('../db/controllers/authController.js');
 
 router.get('/', (req, res) => {
     const items = [
