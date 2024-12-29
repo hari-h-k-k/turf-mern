@@ -1,101 +1,120 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import React from 'react';
+import { useRouter } from 'next/navigation';
+
+const Welcome = () => {
+  const router = useRouter();
+
+  const handleGetStartedClick = () => {
+    router.push('/home'); // Navigate to the desired route
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div style={styles.hero}>
+      <div style={styles.heroContent}>
+        <h1 style={styles.mainHeading}>Your Turf, Your Way</h1>
+        <div style={styles.heroName}>
+          <h1>LockSpot</h1>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        <h2 style={styles.subHeading}>Discover | Connect | Play</h2>
+        <p style={styles.description}>
+          Find and book the best sports facilities near you. Showcase your space for events and activities, and connect with others who share your passion for the game. LockSpot makes it easy to get started.
+        </p>
+        <button
+          style={styles.button}
+          onMouseEnter={(e) => applyHoverStyle(e.target, true)}
+          onMouseLeave={(e) => applyHoverStyle(e.target, false)}
+          onClick={handleGetStartedClick} // Add the onClick handler to navigate
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          Get Started
+        </button>
+      </div>
     </div>
   );
-}
+};
+
+const applyHoverStyle = (element, isHover) => {
+  element.style.transform = isHover ? 'scale(1.1)' : 'scale(1)';
+  element.style.backgroundColor = isHover ? '#005f99' : '#00aaff';
+  element.style.boxShadow = isHover
+    ? '0 6px 12px rgba(0, 0, 0, 0.3)'
+    : '0 4px 8px rgba(0, 0, 0, 0.2)';
+};
+
+const styles = {
+  hero: {
+    backgroundImage:
+      'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/images/turf2.jpg")',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    minWidth: '100vw',
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#fff',
+    textShadow: '0 2px 4px rgba(0, 0, 0, 0.8)',
+    fontFamily: '"Roboto", sans-serif', // Use a nice default font
+  },
+  heroContent: {
+    width: '70%',
+    textAlign: 'center',
+    padding: '40px 20px',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    borderRadius: '20px',
+    boxShadow: '0 8px 16px rgba(0, 0, 0, 0.3)',
+    marginBottom: '50px',
+  },
+  mainHeading: {
+    fontSize: '3rem',
+    marginBottom: '30px',
+    fontWeight: 'bold',
+    letterSpacing: '2px', // Adds a bit of space between letters for a clean look
+    textTransform: 'uppercase', // Makes the main heading uppercase for emphasis
+    fontFamily: '"Poppins", sans-serif', // Modern font for the main heading
+  },
+  heroName: {
+    border: '2px solid #00aaff',
+    color: '#00aaff',
+    padding: '12px 25px',
+    borderRadius: '12px',
+    margin: '30px auto',
+    display: 'inline-block',
+    fontSize: '2.5rem',
+    fontFamily: '"Poppins", sans-serif', // Modern font for the name
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+  },
+  subHeading: {
+    fontSize: '1.8rem',
+    margin: '20px 0',
+    fontFamily: '"Lato", sans-serif', // Lighter font for the subheading
+    fontWeight: '500',
+    color: '#f1f1f1',
+  },
+  description: {
+    fontSize: '1.2rem',
+    lineHeight: '1.8',
+    marginBottom: '30px',
+    fontFamily: '"Lato", sans-serif', // Clean, readable font
+    color: '#f1f1f1',
+  },
+  button: {
+    border: 'none',
+    backgroundColor: '#00aaff',
+    color: '#fff',
+    fontSize: '1.1rem',
+    fontWeight: 'bold',
+    padding: '15px 40px',
+    borderRadius: '30px',
+    cursor: 'pointer',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    transition: 'all 0.3s ease-in-out',
+    fontFamily: '"Poppins", sans-serif', // Matching font for the button
+    letterSpacing: '1px',
+  },
+};
+
+export default Welcome;

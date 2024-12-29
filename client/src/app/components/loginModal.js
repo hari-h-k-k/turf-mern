@@ -144,7 +144,7 @@ const LoginModal = ({ isModalOpen, setIsModalOpen }) => {
                     </div>
                 )}
             </div>
-            <ToastContainer transition={Flip}/>
+            <ToastContainer  position="bottom-right" transition={Flip}/>
         </>
     );
 };
