@@ -2,8 +2,10 @@
 import React, { useState, useContext } from 'react';
 import LoginModal from './loginModal';
 import { useAppContext } from '@/context';
+import { useRouter } from 'next/navigation';
 
 const Navbar = ({ setIsModalOpen }) => {
+const router = useRouter();
   const { info, setInfo } = useAppContext();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -27,6 +29,10 @@ const Navbar = ({ setIsModalOpen }) => {
     setIsDropdownOpen(false); // Close dropdown on logout
   };
 
+  const handleProfileNav = () => {
+    router.push('/profile');
+  };
+
   return (
     <div style={styles.navbar}>
       <div style={styles.logoText}>Lockspot</div>
@@ -37,7 +43,7 @@ const Navbar = ({ setIsModalOpen }) => {
           </button>
           {isDropdownOpen && (
             <div style={styles.dropdown}>
-              <button style={styles.dropdownItem}>My Profile</button>
+              <button style={styles.dropdownItem} onClick={handleProfileNav}>My Profile</button>
               <button style={styles.dropdownItem} onClick={handleLogout}>Logout</button>
             </div>
           )}
