@@ -18,14 +18,14 @@ export default function Home() {
         { id: 3, name: 'Card 3' },
     ];
 
-    const [data, setData] = useState(sampleData);
+    const [data, setData] = useState();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
 
     useEffect(() => {
         axiosInstance
-            .get('/auth') // Replace with the actual endpoint you want to hit
+            .get('/turf/turfs') // Replace with the actual endpoint you want to hit
             .then(response => setData(response.data))
             .catch(error => console.error('Error fetching data: ', error));
     }, [searchKey]);
@@ -38,18 +38,19 @@ export default function Home() {
             </Head>
 
 
-            <Navbar setIsModalOpen={setIsModalOpen}/>
+            <Navbar setIsModalOpen={setIsModalOpen} />
 
-            <LoginModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
+            <LoginModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
 
             <div style={styles.mainContent}>
                 <SearchBar searchKey={searchKey} setSearchKey={setSearchKey} />
 
                 <div style={styles.scrolledContent}>
-                    {data.map((item) => (
-                        <Card key={item.id} item={item} />
+                    {data && Array.isArray(data) && data.map((item) => (
+                        <Card key={item._id || item.index} item={item} />
                     ))}
                 </div>
+
             </div>
         </div>
     );

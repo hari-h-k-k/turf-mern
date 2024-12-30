@@ -20,7 +20,7 @@ const sampleData = [
   },
 ];
 
-const Card = ({ itemm }) => {
+const Card = ({ item }) => {
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 >= 0.5;
@@ -34,7 +34,16 @@ const Card = ({ itemm }) => {
       </>
     );
   };
-  const item =sampleData[0];
+  // const item =sampleData[0];
+  const sample = { 
+      id: 1, 
+      name: 'Item 1', 
+      location: 'New York, USA', 
+      description: 'This is a great place to enjoy outdoor activities with friends and family.', 
+      imageUrl: '/images/turf3.jpg', 
+      rating: 4.5 
+    };
+
   return (
     <div style={styles.card}>
       <img src={item.imageUrl || '/images/turf3.jpg'} alt={item.name} style={styles.cardImage} />
